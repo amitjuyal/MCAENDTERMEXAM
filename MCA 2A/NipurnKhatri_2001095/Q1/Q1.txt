@@ -1,0 +1,156 @@
+#login.html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="login.jsp">
+<table>
+<tr>
+<td>Enter user name</td>
+<td><input type="text" name="t1" placeholder="Enter your name"></td></tr>
+<tr>
+<td>Enter password</td>
+<td><input type="password" name="t2"></td>
+</tr>
+<tr>
+<td><input type="submit" value="Login"></td></tr>
+
+</table>
+</form>
+
+</body>
+</html>
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------
+#DButil
+package coom.mca.demo;
+import java.sql.*;
+public class DButil {
+
+	static Connection con=null;
+	static PreparedStatement pst=null;
+	static ResultSet rs=null;
+	public static Connection getConn(){
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","mca2020","abcd");
+			
+		}
+		catch(Exception e) {
+		System.out.println(e);
+		}
+		return con;
+	}
+	public static ResultSet getData()throws Exception{
+		con=getConn();
+		pst=con.prepareStatement("select * from users");
+		rs=pst.executeQuery();
+		return rs;
+	}
+	public static int addData(UserBean b)throws Exception{
+		int i=0;
+		con=getConn();
+		pst=con.prepareStatement("insert into users values(?,?,?,?)");
+		pst.setString(1,b.getName());
+        pst.setString(2, b.getPassword());
+        pst.setInt(3, b.getAge());
+        pst.setInt(4,b.getPhone());
+        i=pst.executeUpdate();
+        return i;
+	}
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------
+# userbean
+package coom.mca.demo;
+
+public class UserBean {
+private String name;
+private String password;
+private int age;
+private int phone;
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
+public String getPassword() {
+	return password;
+}
+public void setPassword(String password) {
+	this.password = password;
+}
+public int getAge() {
+	return age;
+}
+public void setAge(int age) {
+	this.age = age;
+}
+public int getPhone() {
+	return phone;
+}
+public void setPhone(int phone) {
+	this.phone = phone;
+}
+
+}
+--------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------
+#login.jdp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@page import="coom.mca.demo.UserBean" %>
+    <%@page import="coom.mca.demo.DButil" %>
+    <%@page import="java.sql.*" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<%! UserBean u=null; ResultSet rs=null; %>
+<%
+RequestDispatcher rd=request.getRequestDispatcher("success.jsp");
+String id=request.getParameter("t1");
+String psw=request.getParameter("t2");
+rs=DButil.getData();
+boolean status =false;
+while(rs.next()){
+	if( (id.equals(rs.getString(1) ))&& (psw.equals(rs.getString(2))) ){
+		status=true;
+	}
+}
+if(status){
+	rd.forward(request,response);
+}
+else{
+	out.println("Invalid id or password");
+}
+%>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------
+#success.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<% String user=request.getParameter("t1");
+out.println("WELCOME "+user+"?");
+%>
+</body>
+</html>
