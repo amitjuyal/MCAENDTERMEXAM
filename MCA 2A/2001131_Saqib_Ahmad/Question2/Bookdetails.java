@@ -20,7 +20,7 @@ public static void main(String args[]){
                       if (pstatement != null) {
                               System.out.println("Enter Book Details"); 
                               System.out.println("Book name : "); 
-                              int bookname = scanner.nextInt(); 
+                              String bookname = scanner.nextInt(); 
                               System.out.println("Enter Authur Name : "); 
                               String authurName = scanner.next(); 
                               System.out.println("Enter number of pages : "); 
