@@ -37,7 +37,32 @@ public static void main(String args[]){
                               } else { 
                                   System.out.println(result + " records(s) are  inserted"); 
                               } 
+                    
                       } 
-                   }
+                   } catch (ClassNotFoundException cnfe) { 
+                      cnfe.printStackTrace(); 
+                    } catch (SQLException se) { 
+                      se.printStackTrace(); 
+                    } catch (Exception ex) { 
+                      ex.printStackTrace(); 
+                   } finally { 
+                      try { 
+                          if (pstatement != null) { 
+                              pstatement.close(); 
+                          } 
+                      } catch (SQLException se) { 
+                          se.printStackTrace(); 
+                      } 
+                      try { 
+                          if (connection != null) { 
+                              connection.close(); 
+                          } 
+                      } catch (SQLException se) { 
+                          se.printStackTrace(); 
+                      } 
+                  } 
+              } 
+           
+   
           }  
 }  
