@@ -10,8 +10,8 @@ Connection con=DriverManager.getConnection(
       
 PreparedStatement ps=con.prepareStatement(  
 "select * from Userdata where username=? and password=?");  
-ps.setString(1,name);  
-ps.setString(2,pass);  
+ps.setString(1,username);  
+ps.setString(2,password);  
       
 ResultSet rs=ps.executeQuery();  
 status=rs.next();  
