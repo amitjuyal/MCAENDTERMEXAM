@@ -27,9 +27,9 @@ public static void main(String args[]){
                               int NoOfPages = scanner.nextInt(); 
                               System.out.println("Enter price : "); 
                               int price = scanner.nextInt(); 
-                              pstatement.setInt(1, bookname); 
+                              pstatement.setString(1, bookname); 
                               pstatement.setString(2, authurName); 
-                              pstatement.setString(3, NoOfPages); 
+                              pstatement.setInt(3, NoOfPages); 
                               pstatement.setInt(4, price); 
                               int result = pstatement.executeUpdate(); 
                               if (result == 0) { 
