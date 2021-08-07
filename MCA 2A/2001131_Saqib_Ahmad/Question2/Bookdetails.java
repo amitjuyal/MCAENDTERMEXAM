@@ -24,7 +24,7 @@ public static void main(String args[]){
                               System.out.println("Enter Authur Name : "); 
                               String authurName = scanner.next(); 
                               System.out.println("Enter number of pages : "); 
-                              int NoOfPages = scanner.next(); 
+                              int NoOfPages = scanner.nextInt(); 
                               System.out.println("Enter price : "); 
                               int price = scanner.nextInt(); 
                               pstatement.setInt(1, bookname); 
