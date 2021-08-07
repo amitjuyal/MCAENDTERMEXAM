@@ -1,6 +1,6 @@
 import java.sql.*;  
   
-public class LoginDao {  
+public class Login {  
 public static boolean validate(String name,String pass){  
 boolean status=false;  
 try{  
