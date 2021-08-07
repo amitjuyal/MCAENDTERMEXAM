@@ -3,7 +3,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Insert {
+public class InsertData {
    static final String DB_URL = "jdbc:mysql://localhost";
    static final String USER = "guest";
    static final String PASS = "guest123";
