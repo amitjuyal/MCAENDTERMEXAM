@@ -37,7 +37,7 @@ public class DButil {
 	public static Connection getConn(){
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","system","kattu27");
+			con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","mca2020","abcd");
 			
 		}
 		catch(Exception e) {
