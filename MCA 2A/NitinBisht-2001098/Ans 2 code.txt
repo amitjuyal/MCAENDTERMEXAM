@@ -1,0 +1,142 @@
+Book.java
+package com.javaendterm;
+public class Book
+{
+    private String bookName;
+    private int bookPrice;
+    private int noofpages;
+    private String authorName;
+    
+    public void setBookName(String bookName)
+    {
+        this.bookName=bookName;
+    }
+    
+    public String getBookName()
+    {
+        return this.bookName;
+    }
+    
+    public void setBookPrice(int bookPrice)
+    {
+        this.bookPrice=bookPrice;
+    }
+    public void setnoofpages(int noofpages)
+    {
+        this.noofpages=noofpages;
+    }
+    
+    public int noofages()
+    {
+        return this.noofpages;
+    }
+    
+    public void setAuthorName(String authorName)
+    {
+        this.authorName=authorName;
+    }
+    
+    public String getAuthorName()
+    {
+        return this.authorName;
+    }
+}
+
+Textbook.java
+
+    private String authorName;
+    
+    public void setBookName(String bookName)
+    {
+        this.bookName=bookName;
+    }
+    
+    public String getBookName()
+    {
+        return this.bookName;
+    }
+    
+    public void setBookPrice(int bookPrice)
+    {
+        this.bookPrice=bookPrice;
+    }
+    
+    public int getBookPrice()
+    {
+        return this.bookPrice;
+    }
+ public void setnoofpages(int noofpages)
+    {
+        this.noofpages=noofpages;
+    }
+    
+    public int getnoofpages()
+    {
+        return this.noofpages;
+    }
+    
+    public void setAuthorName(String authorName)
+    {
+        this.authorName=authorName;
+    }
+    
+    public String getAuthorName()
+    {
+        return this.authorName;
+    }
+}
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.Scanner;
+public class TestBook
+{
+    public static void main (String[] args) {
+        Scanner sc=new Scanner(System.in);
+        
+        System.out.println("Enter the Book name:");
+        String bookname=sc.nextLine();
+        
+        System.out.println("Enter the price:");
+        int price=sc.nextInt();
+        sc.nextLine();
+       
+        System.out.println("Enter the noofpages:");
+        int pages=sc.nextInt();
+        sc.nextLine();
+        
+        
+        System.out.println("Enter the Author name:");
+        String authorname=sc.nextLine();
+        
+        Book obj=new Book();
+        obj.setBookName(bookname);
+        obj.setBookPrice(price);
+        obj.setnoofpages(pages);
+        obj.setAuthorName(authorname);
+       
+try {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/sonoo","root","root");
+
+			PreparedStatement stmt = con.prepareStatement("insert into bookdetails values(?,?,?,?)");
+			
+			stmt.setString(1, obj.getBookName());
+			stmt.setString(2, obj.getBookPrice());
+			stmt.setInt(3, obj.getNoOfPages());
+			stmt.setInt(4,obj.getAuthorName());
+
+			int i = stmt.executeUpdate();
+			System.out.println(i + " records inserted");
+
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+	}
+}
+    }
+}

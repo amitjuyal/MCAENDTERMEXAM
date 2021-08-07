@@ -1,0 +1,79 @@
+userdata.db
+CREATE TABLE  "userdata"   
+   (    "username" varchar2(25),   
+    "password" VARCHAR2(40)  
+   )  
+
+<html>  
+<body> 
+ 
+index.html
+<form action="servlet/Search">  
+Enter your username:<input type="text" name="user"/><br/> 
+Enter your password:<input type="text" name="pass"/><br/> 
+  
+<input type="submit" value="search"/>  
+</form>  
+</body>  
+</html> 
+
+search.java 
+import java.io.*;  
+import java.sql.*;  
+import javax.servlet.ServletException;  
+import javax.servlet.http.*;  
+  
+public class Search extends HttpServlet {  
+  
+public void doGet(HttpServletRequest request, HttpServletResponse response)  
+            throws ServletException, IOException {  
+  
+response.setContentType("text/html");  
+PrintWriter out = response.getWriter();  
+          
+String username=request.getParameter("user");  
+int user=Integer.valueOf(username); 
+String password=request.getParameter("pass");  
+int pass=Integer.valueOf(password); 
+          
+try{  
+Class.forName("oracle.jdbc.driver.OracleDriver");  
+Connection con=DriverManager.getConnection(  
+"jdbc:oracle:thin:@localhost:1521:xe","system","oracle");  
+              
+PreparedStatement ps=con.prepareStatement("select * from result where username and password (?,?)");  
+ps.setInt(1,password);  
+              
+out.print("<table width=50% border=1>");  
+out.print("<caption>Result:</caption>");  
+  
+ResultSet rs=ps.executeQuery();  
+              
+/* Printing column names */  
+ResultSetMetaData rsmd=rs.getMetaData();  
+int total=rsmd.getColumnCount();  
+out.print("<tr>");  
+for(int i=1;i<=total;i++)  
+{  
+out.print("<th>"+rsmd.getColumnName(i)+"</th>");  
+}  
+  
+out.print("</tr>");  
+              
+/* Printing result */  
+  
+while(rs.next())  
+{  
+out.print("<tr><td>"+rs.getInt(1)+"</td><td>"+rs.getString(2)+"  
+</td><td>"+rs.getString(3)+"</td><td>"+rs.getString(4)+"</td></tr>");  
+                  
+}  
+  
+out.print("</table>");  
+              
+}catch (Exception e2) {e2.printStackTrace();}  
+          
+finally{out.close();}  
+  
+}  
+}  
