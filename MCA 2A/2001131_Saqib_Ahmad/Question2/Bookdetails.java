@@ -14,7 +14,7 @@ public static void main(String args[]){
                   try { 
                    
                       Class.forName("sun.jdbc.odbc.JdbcOdbcDriver"); 
-                      connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/onlinetutorialspoint", "root", "123456"); 
+                      connection = DriverManager.getConnection("jdbc:mysql://localhost"); 
                       if (connection != null) 
                       pstatement = connection.prepareStatement("insert into Book values(?,?,?,?)"); 
                       if (pstatement != null) { 
