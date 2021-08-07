@@ -17,9 +17,8 @@ public static void main(String args[]){
                       connection = DriverManager.getConnection("jdbc:mysql://localhost"); 
                       if (connection != null) 
                       pstatement = connection.prepareStatement("insert into Book values(?,?,?,?)"); 
-                      if (pstatement != null) { 
-                          for (int i = 1; i <= n; i++) { 
-                              System.out.println("Enter " + i + " Book Details"); 
+                      if (pstatement != null) {
+                              System.out.println("Enter Book Details"); 
                               System.out.println("Book name : "); 
                               int bookname = scanner.nextInt(); 
                               System.out.println("Enter Authur Name : "); 
@@ -38,7 +37,6 @@ public static void main(String args[]){
                               } else { 
                                   System.out.println(result + " records(s) are  inserted"); 
                               } 
-                          } 
                       } 
                    } catch (ClassNotFoundException cnfe) { 
                       cnfe.printStackTrace(); 
