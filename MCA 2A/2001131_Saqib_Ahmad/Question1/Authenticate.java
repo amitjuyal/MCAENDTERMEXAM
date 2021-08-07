@@ -6,7 +6,7 @@ boolean status=false;
 try{  
 Class.forName("oracle.jdbc.driver.OracleDriver");  
 Connection con=DriverManager.getConnection(  
-"jdbc:oracle:thin:@localhost:1521:xe","system","oracle");  
+"jdbc:oracle:thin:@localhost");  
       
 PreparedStatement ps=con.prepareStatement(  
 "select * from Userdata where username=? and password=?");  
