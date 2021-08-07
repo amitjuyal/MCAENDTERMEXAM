@@ -33,35 +33,11 @@ public static void main(String args[]){
                               pstatement.setInt(4, price); 
                               int result = pstatement.executeUpdate(); 
                               if (result == 0) { 
-                                  System.out.println("Student details: are not inserted"); 
+                                  System.out.println("Book details: are not inserted"); 
                               } else { 
                                   System.out.println(result + " records(s) are  inserted"); 
                               } 
                       } 
-                   } catch (ClassNotFoundException cnfe) { 
-                      cnfe.printStackTrace(); 
-                    } catch (SQLException se) { 
-                      se.printStackTrace(); 
-                    } catch (Exception ex) { 
-                      ex.printStackTrace(); 
-                   } finally { 
-                      try { 
-                          if (pstatement != null) { 
-                              pstatement.close(); 
-                          } 
-                      } catch (SQLException se) { 
-                          se.printStackTrace(); 
-                      } 
-                      try { 
-                          if (connection != null) { 
-                              connection.close(); 
-                          } 
-                      } catch (SQLException se) { 
-                          se.printStackTrace(); 
-                      } 
-                  } 
-              } 
-           
-          }
+                   }
           }  
 }  
